@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validation</title>
+</head>
+<style>
+    label{
+        color: rgb(13, 245, 13);
+        font-size: 25px;
+    }
+    input{
+  width: 250px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+}
+  .red{
+      display: none;
+      font-size: 20px;
+      color: rgb(255, 0, 0);
+  }
+ #container{
+    position: relative;
+    margin-left: 350px;
+ }
+</style>
+<body style="background-image: url('https://wallpaperaccess.com/full/271965.jpg'); background-size:cover">
+    <div style="position: absolute;">
+        <form>
+            <label for="uname">Name</label><br>
+            <input type="text" id="uname" onkeyup="fun()"><br>
+            <label for="uname">Mail</label><br>
+            <input type="text" id="umail" onkeyup="cmail()"><br>
+            <label for="num">Number</label><br>
+            <input type="tel" id="num" onkeyup="nummy()"><br>
+            <label for="pas">Password</label><br>
+            <input type="password" id="pas" onkeyup="puppy()"><br>
+            <label for="conpas">Confirm Password</label><br>
+            <input type="password" id="conpas" onkeyup="matching()"><br>
+        </form>
+        <button style="border-radius: 10px;">Submit</button>
+    </div>
+    <div id="container">
+        <p id="mess" class="red">no special characters or numbers in name</p>
+        <p id="maily" class="red">Enter a valid mail eg (abc@xyz.com)</p>
+        <p id="numbo" class="red">enter your phone number. (10 max)</p>
+        <p id="poppy" class="red">Atleast one uppercase in password<p>
+        <p id="poppy2" class="red">Atleast one number in password<p>
+        <p id="poppy3" class="red">Minimum 8 characters<p>
+        <p id="pmatch" class="red">Password Does not match <p>
+    </div>
+<script>
+    function fun(){
+        var spc = /[1234567890!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/g;
+        var username = document.getElementById('uname').value;
+        if(username.match(spc)){
+            document.getElementById('mess').style.display='block';
+        }else{
+            document.getElementById('mess').style.display='none';
+        }
+    }
+
+    function cmail(){
+        var mail = document.getElementById('umail').value;
+        var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+        if (!mail.match(validRegex)) {
+            document.getElementById('maily').style.display = 'block';
+        }else{
+            document.getElementById('maily').style.display = 'none';
+        }
+    }
+    
+    function nummy(){
+        var numm = /^\d{10}$/;
+        var cnum = document.getElementById('num').value;
+        if (!cnum.match(numm)){
+            document.getElementById('numbo').style.display = 'block';
+        }else {
+            document.getElementById('numbo').style.display = 'none';
+        }
+    }
+    function puppy(){
+
+        var n = /[0-9]/g;
+        var p = document.getElementById('pas').value;
+        if(!p.match(n)){
+            document.getElementById('poppy2').style.display = 'block';
+        }else{
+            document.getElementById('poppy2').style.display = 'none';
+        }
+        
+        var x = document.getElementById('pas').value;
+        var uc = /[A-Z]/g;
+        if(!x.match(uc)){
+            document.getElementById("poppy").style.display = 'block';
+        }else{
+            document.getElementById("poppy").style.display = 'none';
+        }
+
+        
+        if(p.length < 8){
+            document.getElementById('poppy3').style.display = 'block';
+        }else{
+            document.getElementById('poppy3').style.display = 'none';
+        }
+    }
+    function matching(){
+        var m1 = document.getElementById('pas').value;
+        var m2 = document.getElementById('conpas').value;
+        if(m2 != m1){
+            document.getElementById('pmatch').style.display = 'block';
+        }else{
+            document.getElementById('pmatch').style.display = 'none';
+        }
+    }
+
+</script>
+</html>
